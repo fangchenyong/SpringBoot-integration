@@ -1,0 +1,82 @@
+#java邮件发送配置
+spring:
+  mail:
+    host: smtp.qq.com           #smtp.163.com
+    username: 1013659102@qq.com #17706441315@163.com
+    password: qleeaxwivfclbfef  #fcy15058622985
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+#文件上传大小
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+#redis单机版
+#  redis:
+#    database: 0
+#    host: 118.25.24.23
+#    port: 6379
+#    password: 123456
+
+#redis集群
+  redis:
+    password: 123456
+    cluster:
+      nodes: 118.25.24.23:7001,118.25.24.23:7002,118.25.24.23:7003,118.25.24.23:7004,118.25.24.23:7005,118.25.24.23:7006
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+    timeout: 0ms
+#mongodb
+  data:
+    mongodb:
+      host: 118.25.24.23
+      port: 27107
+      database: mydb
+      uri: mongodb://name:pass@118.25.24.23:27017/mydb
+
+
+# 数据库访问配置
+  datasource:
+    name: test
+    url: jdbc:mysql://118.25.24.23:3306/joey?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    # 使用c3p0数据源
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+
+
+  activemq:
+    broker-url: tcp://118.25.24.23:61616
+    in-memory: true
+    user: admin
+    password: admin
+    pool:
+      enabled: false
+
+# mybatis配置
+mybatis:
+   mapper-locations: classpath:mapping/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+   type-aliases-package: com.joey.pojo  # 注意：对应实体类的路径
